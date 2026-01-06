@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mahathir Monjur</title>
+  <meta name="description" content="Mahathir Monjur — PhD Candidate at UNC Chapel Hill. Multimodal sensing (audio, mmWave, WiFi CSI, vision) and generative modeling (diffusion/LLMs)." />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="assets/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --font: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --maxw: 1040px;
+
+      /* light */
+      --bg: #ffffff;
+      --text: #0b1220;
+      --muted: #51607a;
+      --border: rgba(11,18,32,0.10);
+      --card: #ffffff;
+      --shadow: 0 10px 30px rgba(11,18,32,0.08);
+      --link: #0a5bd3;
+
+      --accent: #2563eb;
+      --accent2: #06b6d4;
+
+      --radius: 16px;
+    }
+
+    html[data-theme="dark"]{
+      --bg: #0b1020;
+      --text: #eaf0ff;
+      --muted: #b7c3dd;
+      --border: rgba(255,255,255,0.12);
+      --card: rgba(255,255,255,0.03);
+      --shadow: 0 16px 60px rgba(0,0,0,0.45);
+      --link: #8ab4ff;
+    }
+
+    /* Auto theme uses prefers-color-scheme */
+    @media (prefers-color-scheme: dark){
+      html[data-theme="auto"]{
+        --bg: #0b1020;
+        --text: #eaf0ff;
+        --muted: #b7c3dd;
+        --border: rgba(255,255,255,0.12);
+        --card: rgba(255,255,255,0.03);
+        --shadow: 0 16px 60px rgba(0,0,0,0.45);
+        --link: #8ab4ff;
+      }
+    }
+
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a{ color: var(--link); text-decoration: none; }
+    a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+
+    .topbar{
+      position: sticky;
+      top:0;
+      z-index: 50;
+      background: color-mix(in oklab, var(--bg) 92%, transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .brand{
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      white-space: nowrap;
+      color: var(--text);
+    }
+    .brand-dot{
+      width: 10px; height: 10px; border-radius: 99px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent) 18%, transparent);
+    }
+
+    nav{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: flex-end;
+      align-items:center;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    nav a{
+      color: var(--muted);
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+    nav a:hover{
+      color: var(--text);
+      background: color-mix(in oklab, var(--card) 70%, transparent);
+      text-decoration: none;
+    }
+
+    .theme{
+      border: 1px solid var(--border);
+      background: color-mix(in oklab, var(--card) 70%, transparent);
+      color: var(--muted);
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .theme:focus{ outline: none; box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 22%, transparent); }
+
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 34px 18px 90px;
+    }
+
+    /* Layout: sidebar + content like the reference */
+    .layout{
+      display:grid;
+      grid-template-columns: 310px 1fr;
+      gap: 44px;
+      align-items:start;
+    }
+    @media (max-width: 920px){
+      .layout{ grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    .sidebar{
+      position: sticky;
+      top: 78px;
+      align-self: start;
+    }
+    @media (max-width: 920px){
+      .sidebar{ position: static; }
+    }
+
+    .portrait{
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 18%, transparent),
+                                      color-mix(in oklab, var(--accent2) 16%, transparent));
+    }
+
+    .name{
+      margin: 18px 0 4px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+    .title{
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14.5px;
+    }
+    .sub{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14.5px;
+    }
+
+    .icons{
+      display:flex;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .iconbtn{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background: color-mix(in oklab, var(--card) 74%, transparent);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+    }
+    html[data-theme="dark"] .iconbtn{ box-shadow: 0 12px 32px rgba(0,0,0,0.35); }
+    .iconbtn:hover{ transform: translateY(-1px); transition: transform 140ms ease; text-decoration: none; }
+    .iconbtn svg{ width: 18px; height: 18px; fill: currentColor; color: var(--muted); }
+    .iconbtn:hover svg{ color: var(--text); }
+
+    .cvbtn{
+      margin-top: 14px;
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg,
+          color-mix(in oklab, var(--accent) 18%, var(--card)),
+          color-mix(in oklab, var(--accent2) 16%, var(--card)));
+      color: var(--text);
+      font-weight: 700;
+      width: fit-content;
+    }
+    .cvbtn:hover{ text-decoration: none; box-shadow: var(--shadow); }
+
+    /* Content sections */
+    section{
+      padding: 6px 0 34px;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-child{ border-bottom: none; padding-bottom: 0; }
+
+    h2{
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+    p{ margin: 0 0 12px; color: var(--muted); }
+
+    ul{ margin: 8px 0 0 18px; padding: 0; color: var(--muted); }
+    li{ margin: 6px 0; }
+
+    .klist{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .entry{
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.04);
+    }
+    html[data-theme="dark"] .entry{ box-shadow: 0 18px 60px rgba(0,0,0,0.32); }
+
+    .entry .hdr{
+      display:flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+    .entry .role{
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .entry .meta{
+      color: var(--muted);
+      font-size: 13.5px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .entry .org{
+      margin-top: 2px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .pillrow{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pill{
+      border: 1px solid var(--border);
+      background: color-mix(in oklab, var(--card) 82%, transparent);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .small{
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    .news li{ color: var(--muted); }
+    .footer{
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    /* Smooth anchor scroll */
+    html{ scroll-behavior: smooth; }
+  </style>
+
+  <script>
+    (function(){
+      const key="theme_pref_mm";
+      const saved=localStorage.getItem(key);
+      if(saved){ document.documentElement.setAttribute("data-theme", saved); }
+
+      window.setTheme = function(v){
+        document.documentElement.setAttribute("data-theme", v);
+        localStorage.setItem(key, v);
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="brand-dot" aria-hidden="true"></span> Mahathir Monjur</div>
+
+      <nav aria-label="Site">
+        <a href="#home">Home</a>
+        <a href="#awards">Awards</a>
+        <a href="#experience">Experience</a>
+        <a href="#publications">Publications</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="assets/Mahathir_Monjur_CV.pdf" target="_blank" rel="noopener">CV</a>
+
+        <select class="theme" aria-label="Theme" onchange="setTheme(this.value)">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="auto" selected>Auto</option>
+        </select>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="home">
+        <!-- Replace portrait.svg with assets/profile.jpg when you have a real photo -->
+        <img class="portrait" src="assets/portrait.svg" alt="Mahathir Monjur portrait" />
+
+        <div class="name">Mahathir Monjur</div>
+        <div class="title">PhD Candidate • UNC Chapel Hill • Multimodal Sensing + Generative AI</div>
+        <div class="sub">
+          I’m on the job market for industry <b>Research Scientist / Applied Scientist</b> roles.
+          Best way to reach me: <a href="mailto:mahathir@cs.unc.edu"><b>mahathir@cs.unc.edu</b></a>.
+        </div>
+
+        <div class="icons" aria-label="Links">
+          <a class="iconbtn" href="mailto:mahathir@cs.unc.edu" aria-label="Email">
+            <svg viewBox="0 0 24 24"><path d="M2 6.5A2.5 2.5 0 0 1 4.5 4h15A2.5 2.5 0 0 1 22 6.5v11A2.5 2.5 0 0 1 19.5 20h-15A2.5 2.5 0 0 1 2 17.5v-11Zm2.1-.6 7.4 6a1 1 0 0 0 1.3 0l7.4-6a.5.5 0 0 0-.3-.9H4.4a.5.5 0 0 0-.3.9ZM20 8l-6.3 5.1a3 3 0 0 1-3.7 0L4 8v9.5c0 .6.4 1 1 1h14c.6 0 1-.4 1-1V8Z"/></svg>
+          </a>
+          <a class="iconbtn" href="https://scholar.google.com/citations?user=YRr55_IAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar">
+            <svg viewBox="0 0 24 24"><path d="M12 2 1 7l11 5 9-4.09V17h2V7L12 2Zm0 7.27L5.74 7 12 4.73 18.26 7 12 9.27ZM4 10v6.5C4 19.54 7.58 22 12 22s8-2.46 8-5.5V10l-8 3.64L4 10Zm8 10c-3.58 0-6-1.77-6-3.5v-3.36l6 2.73 6-2.73v3.36c0 1.73-2.42 3.5-6 3.5Z"/></svg>
+          </a>
+          <a class="iconbtn" href="https://github.com/Monjur-Mahathir" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385..6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.745.084-.73.084-.73 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.47-2.381 1.235-3.221-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.911 1.23 3.221 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.815 24 17.32 24 12.02c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a class="iconbtn" href="https://www.linkedin.com/in/mmonjur/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 23.5h4V7.98h-4V23.5Zm7 0h4V15.7c0-2.06.39-4.06 2.93-4.06 2.5 0 2.53 2.34 2.53 4.2v7.66h4V15c0-4.02-.86-7.12-5.56-7.12-2.26 0-3.77 1.24-4.39 2.42h-.05V7.98h-3.84V23.5Z"/></svg>
+          </a>
+        </div>
+
+        <a class="cvbtn" href="assets/Mahathir_Monjur_CV.pdf" target="_blank" rel="noopener">Download CV</a>
+
+        <div class="pillrow" aria-label="Interests">
+          <span class="pill">Audio ML</span>
+          <span class="pill">mmWave radar</span>
+          <span class="pill">WiFi CSI</span>
+          <span class="pill">Diffusion / LLMs</span>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div>
+        <section aria-labelledby="bio">
+          <h2 id="bio">Biography</h2>
+          <p>
+            I am a final-year PhD candidate in the Department of Computer Science at UNC Chapel Hill (expected Apr 2026),
+            working on multimodal sensing and generative modeling. My research targets robust perception under
+            multipath/occlusion and device heterogeneity, spanning audio, mmWave radar, WiFi CSI, and RGB-D.
+          </p>
+          <p class="small">
+            Representative formulation: learn <b>z = f_θ(x_audio, x_mmWave, x_CSI, x_vision)</b>, then solve tasks with <b>y = g_ϕ(z)</b>.
+            I aim for systems that are not only accurate but also reproducible and deployable.
+          </p>
+          <div class="pillrow">
+            <span class="pill">Multimodal fusion</span>
+            <span class="pill">Representation learning</span>
+            <span class="pill">Embedded & intermittent devices</span>
+          </div>
+        </section>
+
+        <section aria-labelledby="edu">
+          <h2 id="edu">Education</h2>
+          <div class="klist">
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">University of North Carolina at Chapel Hill</div>
+                <div class="meta">2021 – Present</div>
+              </div>
+              <div class="org">PhD in Computer Science (expected Apr 2026) • MS in CS (Dec 2023)</div>
+            </div>
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">Bangladesh University of Engineering and Technology</div>
+                <div class="meta">Oct 2018</div>
+              </div>
+              <div class="org">BS in Computer Science</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="awards" aria-labelledby="awards-h">
+          <h2 id="awards-h">Awards and Honors</h2>
+          <div class="klist">
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">U.S. Patent</div>
+                <div class="meta">Issued Jan 14, 2025</div>
+              </div>
+              <div class="org">User Orientation Estimation — U.S. Patent 12,200,449</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="experience" aria-labelledby="exp-h">
+          <h2 id="exp-h">Experience</h2>
+          <div class="klist">
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">Part-time Student Researcher</div>
+                <div class="meta">Aug 2025 – Dec 2025 (Remote)</div>
+              </div>
+              <div class="org">Meta Reality Labs — Wearable Audio Technologies</div>
+              <ul>
+                <li>Perceptual binaural/mono speech-quality estimation using large pretrained encoders (AST, EnCodec, wav2vec).</li>
+                <li>Multimodal LLM alignment for natural-language quality scoring and interpretable rationales.</li>
+              </ul>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">Research Scientist Intern</div>
+                <div class="meta">May 2025 – Aug 2025 (Redmond, WA)</div>
+              </div>
+              <div class="org">Meta Reality Labs — Wearable Audio Technologies</div>
+              <ul>
+                <li>Built a multidimensional MOS predictor (<b>&lt; 0.4 MAE</b> on a 7-point scale) to reduce dependence on costly listening tests.</li>
+              </ul>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">Applied Scientist Intern</div>
+                <div class="meta">May 2022 – Aug 2023 (Cambridge, MA)</div>
+              </div>
+              <div class="org">Amazon — Audio Research & Algorithm (ARA)</div>
+              <ul>
+                <li>Multi-device audio sensing for user facing-direction via learned embedding exchange; resulted in a granted U.S. patent.</li>
+                <li>Attention-based models to generalize SSL and speaking-direction across heterogeneous microphone arrays.</li>
+              </ul>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">Research Assistant</div>
+                <div class="meta">2021 – Present</div>
+              </div>
+              <div class="org">UNC Chapel Hill — Multimodal Sensing & Generative AI (Advisor: Shahriar Nirjon)</div>
+              <ul>
+                <li>Systems: mmWEAVER, Wave2Vid, VoiceDirect, SoundSieve, AURA, CarFi, mmDefender.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="publications" aria-labelledby="pub-h">
+          <h2 id="pub-h">Publications</h2>
+          <div class="klist">
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">mmWEAVER: Environment-Specific mmWave Signal Synthesis from a Photo and Activity Description</div>
+                <div class="meta">WACV 2026</div>
+              </div>
+              <div class="org">Mahathir Monjur, Shahriar Nirjon</div>
+              <div class="small">
+                <a href="https://arxiv.org/abs/2512.11894" target="_blank" rel="noopener">arXiv</a> •
+                <a href="https://wacv.thecvf.com/Conferences/2026/AcceptedPapers" target="_blank" rel="noopener">WACV listing</a> •
+                <a href="https://github.com/Monjur-Mahathir/mmWeaver" target="_blank" rel="noopener">Code</a>
+              </div>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">SoundSieve: Seconds-Long Audio Event Recognition on Intermittently-Powered Systems</div>
+                <div class="meta">MobiSys 2023</div>
+              </div>
+              <div class="small"><a href="https://scholar.google.com/citations?user=YRr55_IAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></div>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">VoiceDirect: mmWave and Audio Signal Fusion for User Localization and Speaking Direction Estimation</div>
+                <div class="meta">EWSN 2024</div>
+              </div>
+              <div class="small"><a href="https://scholar.google.com/citations?user=YRr55_IAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></div>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">User orientation estimation</div>
+                <div class="meta">U.S. Patent 12,200,449</div>
+              </div>
+              <div class="small">Issued Jan 14, 2025</div>
+            </div>
+          </div>
+
+          <p class="small" style="margin-top:12px;">
+            For a complete list, see <a href="https://scholar.google.com/citations?user=YRr55_IAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.
+          </p>
+        </section>
+
+        <section id="news" aria-labelledby="news-h">
+          <h2 id="news-h">News</h2>
+          <ul class="news">
+            <li><b>Dec 2025:</b> Completed part-time Student Researcher appointment at Meta Reality Labs.</li>
+            <li><b>2026:</b> mmWEAVER accepted to WACV 2026.</li>
+            <li><b>2025:</b> U.S. patent issued (User Orientation Estimation).</li>
+          </ul>
+        </section>
+
+        <section id="contact" aria-labelledby="ct-h">
+          <h2 id="ct-h">Contact</h2>
+          <ul>
+            <li>Email: <a href="mailto:mahathir@cs.unc.edu">mahathir@cs.unc.edu</a></li>
+            <li>Phone: +1 (919) 904-5633</li>
+            <li>Location: Chapel Hill, North Carolina, USA</li>
+          </ul>
+
+          <div class="footer">
+            © <span id="y"></span> Mahathir Monjur • Single-page static site.
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Set dropdown to current saved theme
+    const sel = document.querySelector("select.theme");
+    const cur = document.documentElement.getAttribute("data-theme") || "auto";
+    sel.value = cur;
+
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
