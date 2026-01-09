@@ -13,6 +13,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    .attention{
+      font-weight: 800;
+      color: #d11a2a;            /* red */
+    }
+    .attention a{
+      color: #d11a2a;            /* make email same color */
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
     :root{
       --font: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       --maxw: 1040px;
@@ -226,6 +235,40 @@
     }
     .cvbtn:hover{ text-decoration: none; box-shadow: var(--shadow); }
 
+    
+    /* Projects */
+    .projgrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .projdesc{ margin-top: 8px; }
+    .diagram{
+      margin-top: 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: color-mix(in oklab, var(--card) 82%, transparent);
+      padding: 10px;
+      overflow: hidden;
+    }
+    .diagram svg{
+      width: 100%;
+      height: auto;
+      display:block;
+    }
+    .diagram text{
+      font-family: var(--font);
+      fill: var(--muted);
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .diagram .title{
+      fill: var(--text);
+      font-weight: 800;
+      font-size: 12.5px;
+    }
+
     /* Content sections */
     section{
       padding: 6px 0 34px;
@@ -336,10 +379,12 @@
       <div class="brand"><span class="brand-dot" aria-hidden="true"></span> Mahathir Monjur</div>
 
       <nav aria-label="Site">
+
         <a href="#home">Home</a>
-        <a href="#awards">Awards</a>
         <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
         <a href="#publications">Publications</a>
+        <a href="#awards">Awards</a>
         <a href="#news">News</a>
         <a href="#contact">Contact</a>
         <a href="assets/Mahathir_Monjur_CV.pdf" target="_blank" rel="noopener">CV</a>
@@ -358,12 +403,17 @@
       <!-- Sidebar -->
       <aside class="sidebar" id="home">
         <!-- Replace portrait.svg with assets/profile.jpg when you have a real photo -->
-        <img class="portrait" src="assets/profile.jpg" alt="Mahathir Monjur portrait" />
+        <img class="portrait" src="assets/profile.webp" alt="Mahathir Monjur portrait" />
 
         <div class="name">Mahathir Monjur</div>
-        <div class="title">PhD Candidate • UNC Chapel Hill • Multimodal Sensing + Generative AI</div>
+        <div class="title">PhD Candidate • UNC Chapel Hill</div>
+        <div class="title">Expected Graduation: Spring 2026</div>
         <div class="sub">
-          I’m on the job market for industry <b>Research Scientist / Applied Scientist</b> roles.
+          <span class="attention">
+            I’m on the job market for industry <b>Research Scientist / Applied Scientist</b> roles.
+          </span>
+        </div>
+        <div class="sub">
           Best way to reach me: <a href="mailto:mahathir@cs.unc.edu"><b>mahathir@cs.unc.edu</b></a>.
         </div>
 
@@ -383,32 +433,33 @@
         </div>
 
         <a class="cvbtn" href="assets/Mahathir_Monjur_CV.pdf" target="_blank" rel="noopener">Download CV</a>
-
-        <div class="pillrow" aria-label="Interests">
-          <span class="pill">Audio ML</span>
-          <span class="pill">mmWave radar</span>
-          <span class="pill">WiFi CSI</span>
-          <span class="pill">Diffusion / LLMs</span>
-        </div>
       </aside>
 
       <!-- Main content -->
       <div>
+        
         <section aria-labelledby="bio">
           <h2 id="bio">Biography</h2>
           <p>
-            I am a final-year PhD candidate in the Department of Computer Science at UNC Chapel Hill (expected Apr 2026),
-            working on multimodal sensing and generative modeling. My research targets robust perception under
-            multipath/occlusion and device heterogeneity, spanning audio, mmWave radar, WiFi CSI, and RGB-D.
+            I am a PhD candidate in Computer Science at UNC Chapel Hill (expected Apr 2026). My research builds
+            <b>robust, real-world sensing systems</b> that infer human context from signals like
+            <b>audio</b> (speech), <b>RF</b> (mmWave radar, WiFi CSI), and <b>vision</b> (RGB-D).
           </p>
-          <p class="small">
-            Representative formulation: learn <b>z = f_θ(x_audio, x_mmWave, x_CSI, x_vision)</b>, then solve tasks with <b>y = g_ϕ(z)</b>.
-            I aim for systems that are not only accurate but also reproducible and deployable.
+          <p>
+            A core challenge across these modalities is <b>generalization</b>: models often degrade under domain shift caused by new
+            rooms, device placements, background noise, multipath, occlusions, and hardware differences. To address this, I design
+            <b>data-centric learning pipelines</b> that combine careful evaluation across conditions with
+            <b>synthetic data generation using generative AI</b>, creating realistic, environment-conditioned training data that improves
+            robustness to new environments and users.
+            I also work on <b>multimodal and multi-device fusion</b>—learning joint representations from complementary modalities (Audio,
+            RF, text, vision) to improve accuracy and reliability in practical deployments.
           </p>
+
           <div class="pillrow">
-            <span class="pill">Multimodal fusion</span>
-            <span class="pill">Representation learning</span>
-            <span class="pill">Embedded & intermittent devices</span>
+            <span class="pill">Multimodal sensing</span>
+            <span class="pill">Machine Learning</span>
+            <span class="pill">Generative AI</span>
+            <span class="pill">Audio</span>
           </div>
         </section>
 
@@ -420,32 +471,20 @@
                 <div class="role">University of North Carolina at Chapel Hill</div>
                 <div class="meta">2021 – Present</div>
               </div>
-              <div class="org">PhD in Computer Science (expected Apr 2026) • MS in CS (Dec 2023)</div>
+              <div class="org">PhD in Computer Science (expected Apr 2026)</div>
+              <div class="org">MS in Computer Science (Graduated Dec 2023)</div>
             </div>
             <div class="entry">
               <div class="hdr">
                 <div class="role">Bangladesh University of Engineering and Technology</div>
-                <div class="meta">Oct 2018</div>
+                <div class="meta">2014 - 2018</div>
               </div>
-              <div class="org">BS in Computer Science</div>
+              <div class="org">BS in Computer Science (Graduated Oct 2018)</div>
             </div>
           </div>
         </section>
 
-        <section id="awards" aria-labelledby="awards-h">
-          <h2 id="awards-h">Awards and Honors</h2>
-          <div class="klist">
-            <div class="entry">
-              <div class="hdr">
-                <div class="role">U.S. Patent</div>
-                <div class="meta">Issued Jan 14, 2025</div>
-              </div>
-              <div class="org">User Orientation Estimation — U.S. Patent 12,200,449</div>
-            </div>
-          </div>
-        </section>
-
-        <section id="experience" aria-labelledby="exp-h">
+<section id="experience" aria-labelledby="exp-h">
           <h2 id="exp-h">Experience</h2>
           <div class="klist">
             <div class="entry">
@@ -453,10 +492,9 @@
                 <div class="role">Part-time Student Researcher</div>
                 <div class="meta">Aug 2025 – Dec 2025 (Remote)</div>
               </div>
-              <div class="org">Meta Reality Labs — Wearable Audio Technologies</div>
+              <div class="org">Meta Reality Labs — Wearable Audio Technologies Team</div>
               <ul>
-                <li>Perceptual binaural/mono speech-quality estimation using large pretrained encoders (AST, EnCodec, wav2vec).</li>
-                <li>Multimodal LLM alignment for natural-language quality scoring and interpretable rationales.</li>
+                <li>Conducting research on binaural audio simulation, processing and neural audio compression.</li>
               </ul>
             </div>
 
@@ -465,50 +503,102 @@
                 <div class="role">Research Scientist Intern</div>
                 <div class="meta">May 2025 – Aug 2025 (Redmond, WA)</div>
               </div>
-              <div class="org">Meta Reality Labs — Wearable Audio Technologies</div>
+              <div class="org">Meta Reality Labs — Wearable Audio Technologies Team</div>
               <ul>
-                <li>Built a multidimensional MOS predictor (<b>&lt; 0.4 MAE</b> on a 7-point scale) to reduce dependence on costly listening tests.</li>
+                <li>Designed a multi-dimensional perceptual speech-quality estimator for binaural audio by utilizing 
+                  large pretrained encoders (AST, EnCodec, and wave2vec), achieving less than 0.4 MAE on a 7-point
+                  MOS scale.
+                </li>
+                <li>
+                  Developed a multimodal LLM that aligns spectral audio embeddings with Llama-3.1-8B, enabling
+                  natural-language quality scoring and interpretable rationale generation.
+                </li>
               </ul>
             </div>
 
             <div class="entry">
               <div class="hdr">
                 <div class="role">Applied Scientist Intern</div>
-                <div class="meta">May 2022 – Aug 2023 (Cambridge, MA)</div>
+                <div class="meta">May 2023 – Aug 2023 (Cambridge, MA)</div>
               </div>
-              <div class="org">Amazon — Audio Research & Algorithm (ARA)</div>
+              <div class="org">Amazon — Audio Research & Algorithm Team (ARA)</div>
               <ul>
-                <li>Multi-device audio sensing for user facing-direction via learned embedding exchange; resulted in a granted U.S. patent.</li>
-                <li>Attention-based models to generalize SSL and speaking-direction across heterogeneous microphone arrays.</li>
+                <li>Developed attention-based models to generalize SSL and speaking-direction across heterogeneous microphone arrays.</li>
               </ul>
             </div>
 
             <div class="entry">
               <div class="hdr">
-                <div class="role">Research Assistant</div>
-                <div class="meta">2021 – Present</div>
+                <div class="role">Applied Scientist Intern</div>
+                <div class="meta">May 2022 – Aug 2022 (Cambridge, MA)</div>
               </div>
-              <div class="org">UNC Chapel Hill — Multimodal Sensing & Generative AI (Advisor: Shahriar Nirjon)</div>
+              <div class="org">Amazon — Audio Research & Algorithm Team (ARA)</div>
               <ul>
-                <li>Systems: mmWEAVER, Wave2Vid, VoiceDirect, SoundSieve, AURA, CarFi, mmDefender.</li>
+                <li>Developed the first multi-device audio sensing system that estimates a user’s facing direction by leveraging
+                  the frequency-dependent directivity of human speech. Used in prototype devices, awarded a U.S. Patent.
+                </li>
               </ul>
             </div>
-          </div>
-        </section>
 
         <section id="publications" aria-labelledby="pub-h">
           <h2 id="pub-h">Publications</h2>
           <div class="klist">
+
             <div class="entry">
               <div class="hdr">
-                <div class="role">mmWEAVER: Environment-Specific mmWave Signal Synthesis from a Photo and Activity Description</div>
+                <div class="role">mmWEAVER: mmWave Signal Synthesis from a Photo and Activity Description</div>
                 <div class="meta">WACV 2026</div>
               </div>
               <div class="org">Mahathir Monjur, Shahriar Nirjon</div>
               <div class="small">
-                <a href="https://arxiv.org/abs/2512.11894" target="_blank" rel="noopener">arXiv</a> •
-                <a href="https://wacv.thecvf.com/Conferences/2026/AcceptedPapers" target="_blank" rel="noopener">WACV listing</a> •
-                <a href="https://github.com/Monjur-Mahathir/mmWeaver" target="_blank" rel="noopener">Code</a>
+                <a href="https://arxiv.org/abs/2512.11894" target="_blank" rel="noopener">Paper</a> •
+                <a href="https://wacv.thecvf.com/Conferences/2026/AcceptedPapers" target="_blank" rel="noopener">WACV listing</a>
+              </div>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">mmDefender: A mmWave System for On-Body Localization of Concealed Threats in Moving Persons</div>
+                <div class="meta">EWSN 2025 • Best Paper Runner-Up</div>
+              </div>
+              <div class="org">Shao-Jung (Louie) Lu, Mahathir Monjur, Sirajum Munir, Shahriar Nirjon</div>
+              <div class="small">
+                <a href="https://drive.google.com/file/d/14Euke8VaYvX_L9ooulcsN5HY9gy_wzp0/view" target="_blank" rel="noopener">Paper</a> •
+                <a href="https://www.ewsn25.cs.kuleuven.be/program/accepted-papers" target="_blank" rel="noopener">EWSN listing</a>
+              </div>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">User Orientation Estimation</div>
+                <div class="meta">United States Patent US12200449 (Amazon Technologies Inc)</div>
+              </div>
+              <div class="org">Mahathir Monjur, Mrudula V Athi, Md Tamzeed Islam, Wontak Kim</div>
+              <div class="small">
+                <a href="https://patentimages.storage.googleapis.com/74/67/ed/8d6133f4b93f85/US12200449.pdf" target="_blank" rel="noopener">Paper</a>
+              </div>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">VoiceDirect: mmWave and Audio Signal Fusion for User Localization and Speaking Direction Estimation</div>
+                <div class="meta">EWSN 2024</div>
+              </div>
+              <div class="org">Mahathir Monjur, Shahriar Nirjon</div>
+              <div class="small">
+                <a href="https://ewsn.org/file-repository/ewsn2024/ewsn24-final155.pdf" target="_blank" rel="noopener">Paper</a> •
+                <a href="https://ewsn24.tii.ae/accepted-papers-summer-round.html" target="_blank" rel="noopener">EWSN listing</a>
+              </div>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">Data Distribution Dynamics in Real-World WiFi-Based Patient Activity Monitoring for Home Healthcare</div>
+                <div class="meta">IEEE ICHI 2024</div>
+              </div>
+              <div class="org">Mahathir Monjur, et al.</div>
+              <div class="small">
+                <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10628917" target="_blank" rel="noopener">Paper</a>
               </div>
             </div>
 
@@ -517,37 +607,78 @@
                 <div class="role">SoundSieve: Seconds-Long Audio Event Recognition on Intermittently-Powered Systems</div>
                 <div class="meta">MobiSys 2023</div>
               </div>
-              <div class="small"><a href="https://scholar.google.com/citations?user=YRr55_IAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></div>
+              <div class="org">Mahathir Monjur, Yubo Luo, Zhenyu Wang, Shahriar Nirjon</div>
+              <div class="small">
+                <a href="https://dl.acm.org/doi/epdf/10.1145/3581791.3596859" target="_blank" rel="noopener">Paper</a> •
+                <a href="https://www.sigmobile.org/mobisys/2023/accepted-papers.html" target="_blank" rel="noopener">MobiSys listing</a>
+              </div>
             </div>
 
             <div class="entry">
               <div class="hdr">
-                <div class="role">VoiceDirect: mmWave and Audio Signal Fusion for User Localization and Speaking Direction Estimation</div>
-                <div class="meta">EWSN 2024</div>
+                <div class="role">CarFi: Rider Side Localization using Wi-Fi CSI</div>
+                <div class="meta">IEEE International Conference on Mobile Ad-Hoc and Smart Systems (MASS 2023)</div>
               </div>
-              <div class="small"><a href="https://scholar.google.com/citations?user=YRr55_IAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></div>
+              <div class="org">S. Munir, H. Chen, S. Fang, Mahathir Monjur, S. Lin, S. Nirjon</div>
+              <div class="small">
+                <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10298292" target="_blank" rel="noopener">Paper</a> •
+                <a href="https://www.proceedings.com/content/071/071111webtoc.pdf" target="_blank" rel="noopener">MASS listing</a>
+              </div>
             </div>
 
             <div class="entry">
               <div class="hdr">
-                <div class="role">User orientation estimation</div>
-                <div class="meta">U.S. Patent 12,200,449</div>
+                <div class="role">Representative dissimilar path queries: accommodating human movement dynamics in road networks</div>
+                <div class="meta">Journal of Spatial Information Science 2023</div>
               </div>
-              <div class="small">Issued Jan 14, 2025</div>
+              <div class="org">Tanzima Hashem, Matt Duckham, Mahathir Monjur, Fariha Tabassum Islam</div>
+              <div class="small">
+                <a href="https://d1wqtxts1xzle7.cloudfront.net/103909706/173-libre.pdf?1688148584=&response-content-disposition=inline%3B+filename%3DRepresentative_dissimilar_path_queries_a.pdf&Expires=1767929306&Signature=aaG8ljMB17IK~Muq~7Fz3VCmJbQO8FhmLZt22x-Zt-isfQW7X6Wqnrhs3UWRyvJrb2Y4uyCgxsARFMr9WECR1H3a3A-GtFzlF5bTxiFIwu2I8W~FuEYWMAMhVd25VsEk7YLGUDwv6RW7ejx3YY6gdoI2q~eiHVfnA5yk5EtATc6PBz7fNUfLJyfJrB0oJGnh82JDyfGOM99DfqB-QgShlQG4HLVcwd~rHWYK3v-ny3RVsoQ3UGlKEcKHn~xMofRa8xLe6cbytNYeq3wSdA-~98d9nqLayHemsIdXi~7efiCZmEHSLEEC2ZC-YqKvvWow8uTCqNiCm9whWg4lqWiq6w__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA" target="_blank" rel="noopener">Paper</a>
+              </div>
             </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">An Empirical Analysis of Perforated Audio Classification</div>
+                <div class="meta">ACM Workshop on Intelligent Acoustic Systems and Applications 2022</div>
+              </div>
+              <div class="org">Mahathir Monjur, Shahriar Nirjon</div>
+              <div class="small">
+                <a href="https://dl.acm.org/doi/pdf/10.1145/3539490.3539602" target="_blank" rel="noopener">Paper</a>
+              </div>
+            </div>
+
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">Smartphone based fundus camera for the diagnosis of retinal diseases</div>
+                <div class="meta">Smart Health 2021</div>
+              </div>
+              <div class="org">Mahathir Monjur, Iram Tazim Hoque, Tanzima Hashem, Md Abdur Rakib, Judy E. Kim, Sheikh Iqbal Ahamed</div>
+              <div class="small">
+                <a href="https://www.researchgate.net/profile/Iram-Hoque/publication/335292278_Smartphone_Based_Fundus_Camera_for_the_Diagnosis_of_Retinal_Diseases/links/5da8502592851caa1babcbdf/Smartphone-Based-Fundus-Camera-for-the-Diagnosis-of-Retinal-Diseases.pdf" target="_blank" rel="noopener">Paper</a>
+              </div>
+            </div>
+
           </div>
 
           <p class="small" style="margin-top:12px;">
-            For a complete list, see <a href="https://scholar.google.com/citations?user=YRr55_IAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.
+            Full list and citation stats are on <a href="https://scholar.google.com/citations?user=YRr55_IAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.
           </p>
         </section>
 
+        
         <section id="news" aria-labelledby="news-h">
           <h2 id="news-h">News</h2>
           <ul class="news">
-            <li><b>Dec 2025:</b> Completed part-time Student Researcher appointment at Meta Reality Labs.</li>
-            <li><b>2026:</b> mmWEAVER accepted to WACV 2026.</li>
-            <li><b>2025:</b> U.S. patent issued (User Orientation Estimation).</li>
+            <li><b>Dec 2025:</b> Completed part-time Student Researcher appointment at Meta Reality Labs (Wearable Audio Technologies).</li>
+            <li><b>Nov 2025:</b> mmWEAVER accepted to WACV 2026.</li>
+            <li><b>Sep 2025:</b> mmDefender received Best Paper Runner-Up at EWSN 2025.</li>
+            <li><b>Aug 2025:</b> Completed Research Scientist internship at Meta Reality Labs (Redmond, WA).</li>
+            <li><b>Jan 2025:</b> U.S. Patent issued (User Orientation Estimation, 12,200,449).</li>
+            <li><b>May 2024:</b> VoiceDirect published at EWSN 2024.</li>
+            <li><b>Aug 2023:</b> Completed Applied Scientist internship at Amazon (Cambridge, MA).</li>
+            <li><b>May 2023:</b> SoundSieve published at MobiSys 2023.</li>
+            <li><b>Aug 2022:</b> Completed Applied Scientist internship at Amazon (Cambridge, MA).</li>
           </ul>
         </section>
 
@@ -560,7 +691,7 @@
           </ul>
 
           <div class="footer">
-            © <span id="y"></span> Mahathir Monjur • Single-page static site.
+            © <span id="y"></span> Mahathir Monjur
           </div>
         </section>
       </div>
