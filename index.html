@@ -382,9 +382,9 @@
 
         <a href="#home">Home</a>
         <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
         <a href="#publications">Publications</a>
         <a href="#awards">Awards</a>
+        <a href="#projects">Projects</a>
         <a href="#news">News</a>
         <a href="#contact">Contact</a>
         <a href="assets/Mahathir_Monjur_CV.pdf" target="_blank" rel="noopener">CV</a>
@@ -687,6 +687,170 @@
 
           </div>
         </section>
+
+
+        <section id="projects" aria-labelledby="proj-h">
+          <h2 id="proj-h">Projects</h2>
+          <p class="small">
+            I build robust indoor sensing systems across audio, RF (mmWave / WiFi CSI), and vision, with a focus on
+            generalization across new rooms, users, and device placements. A recurring theme is leveraging generative modeling
+            and synthetic data to reduce data-collection burden and improve robustness under domain shift.
+          </p>
+
+          <div class="klist">
+
+            <!-- Wave2Vid -->
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">Wave2Vid: Generating Realistic Video of Human Activity from mmWave Radar</div>
+                <div class="meta">mmWave, pose estimation, diffusion, video generation</div>
+              </div>
+              <div class="org">
+                Synthesizes human-activity video directly from mmWave radar while preserving subject identity and background
+                via a single reference image.
+              </div>
+
+              <p class="small" style="margin-top:8px;">
+                We introduce a factorized pipeline: (i) map short radar bursts to 2D body pose using a spatiotemporal transformer
+                with structure- and temporal-smoothness-aware losses; (ii) complete face/hand landmarks with a conditional pose
+                prior; (iii) stabilize motion using motion-gated root tracking, joint-wise smoothing, and kinematic projection.
+                A pose-and-image–conditioned diffusion model generates a reference-consistent first frame, then a frozen
+                HyperMotion-based video diffusion backbone produces the final video guided by the pose sequence and a text prompt.
+              </p>
+
+              <ul class="small" style="margin:10px 0 0 18px;">
+                <li><b>HuPR:</b> FVD 232.4 → 150.2, AKD 0.091 → 0.035, PCK@0.2 0.519 → 0.741 (vs. HuPR baseline).</li>
+                <li><b>mmFi:</b> similar trends; demonstrates mmWave-to-video as a bridge to RGB-centric vision tools.</li>
+              </ul>
+
+              <figure class="card" style="margin-top:12px;">
+                <figcaption class="small"><b>System overview.</b></figcaption>
+                <img src="assets/wav2vid_system.png" alt="Wave2Vid system diagram" loading="lazy" style="width:100%; border-radius:14px; border:1px solid var(--border); margin-top:8px;">
+              </figure>
+
+              <figure class="card" style="margin-top:12px;">
+                <figcaption class="small"><b>Qualitative samples.</b></figcaption>
+                <img src="assets/wav2vid_samples.png" alt="Wave2Vid sample results" loading="lazy" style="width:100%; border-radius:14px; border:1px solid var(--border); margin-top:8px;">
+              </figure>
+            </div>
+
+            <!-- SpeechQualityLLM -->
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">SpeechQualityLLM: LLM-Based Multimodal Assessment of Speech Quality</div>
+                <div class="meta">Text-audio alignment, speech encoder, speech LLM</div>
+              </div>
+              <div class="org">
+                A multimodal speech-quality QA system that answers natural-language questions about degradations and perceptual
+                dimensions, with optional clean-reference input for double-ended assessment.
+              </div>
+
+              <p class="small" style="margin-top:8px;">
+                Instead of outputting a fixed scalar score, SpeechQualityLLM couples an audio encoder with a language model and
+                is trained using template-based question–answer pairs (overall MOS + noisiness, coloration, discontinuity, loudness)
+                in both single-ended and double-ended setups. The model generates textual answers from which numeric predictions
+                are parsed, enabling interactive analysis and human-readable rationales.
+              </p>
+
+              <ul class="small" style="margin:10px 0 0 18px;">
+                <li><b>NISQA (double-ended):</b> MOS MAE ≈ 0.41, Pearson ≈ 0.86 on held-out clips.</li>
+              </ul>
+
+              <figure class="card" style="margin-top:12px;">
+                <figcaption class="small"><b>System overview.</b></figcaption>
+                <img src="assets/speech_system.png" alt="SpeechQualityLLM system diagram" loading="lazy" style="width:100%; border-radius:14px; border:1px solid var(--border); margin-top:8px;">
+              </figure>
+            </div>
+
+            <!-- mmWEAVER -->
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">mmWEAVER: Environment-Specific mmWave Signal Synthesis from a Photo and Activity Description</div>
+                <div class="meta">Synthetic data generation</div>
+              </div>
+              <div class="org">
+                Generates realistic, environment-conditioned complex mmWave I/Q signals to scale RF sensing models beyond limited
+                real data and expensive simulation.
+              </div>
+
+              <p class="small" style="margin-top:8px;">
+                mmWEAVER models mmWave signals as continuous functions using implicit neural representations (INRs) with up to
+                49× compression, and uses hypernetworks to generate INR parameters conditioned on (i) environment context from an
+                RGB-D image encoder and (ii) motion features from text-to-pose generation (MotionGPT). This yields fast, adaptive
+                multi-resolution signal synthesis while preserving phase—critical for downstream point clouds and activity models.
+              </p>
+
+              <ul class="small" style="margin:10px 0 0 18px;">
+                <li>Signal realism: complex SSIM 0.88, PSNR 35 dB.</li>
+                <li>Downstream gains: up to +7% activity accuracy, up to −15% pose error; 6×–35× faster than simulation.</li>
+              </ul>
+
+              <figure class="card" style="margin-top:12px;">
+                <figcaption class="small"><b>System overview.</b></figcaption>
+                <img src="assets/mmweaver_system.png" alt="mmWEAVER system diagram" loading="lazy" style="width:100%; border-radius:14px; border:1px solid var(--border); margin-top:8px;">
+              </figure>
+            </div>
+
+            <!-- SoundSieve -->
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">SoundSieve: Seconds-Long Audio Event Recognition on Intermittently-Powered Systems</div>
+                <div class="meta">Energy-aware on-device audio ML</div>
+              </div>
+              <div class="org">
+                Enables accurate audio event recognition when energy harvesting causes frequent on/off cycles and bursty missing
+                segments that standard interpolation cannot recover.
+              </div>
+
+              <p class="small" style="margin-top:8px;">
+                SoundSieve learns which parts of long audio events are most informative via an offline analyzer, then uses a
+                lightweight, content- and energy-aware sampler at runtime to decide when to wake the device and capture the next
+                audio chunk. A lightweight intermittence-aware classifier performs imputation and on-device inference.
+              </p>
+
+              <ul class="small" style="margin:10px 0 0 18px;">
+                <li>Improves accuracy by 5%–30% over prior intermittence-aware baselines across datasets and real systems.</li>
+                <li>Designed for practical embedded constraints (power, compute, duty cycling).</li>
+              </ul>
+
+              <figure class="card" style="margin-top:12px;">
+                <figcaption class="small"><b>System overview.</b></figcaption>
+                <img src="assets/soundsieve_system.png" alt="SoundSieve system diagram" loading="lazy" style="width:100%; border-radius:14px; border:1px solid var(--border); margin-top:8px;">
+              </figure>
+            </div>
+
+            <!-- VoiceDirect -->
+            <div class="entry">
+              <div class="hdr">
+                <div class="role">VoiceDirect: mmWave + Audio Fusion for User Localization and Speaking Direction Estimation</div>
+                <div class="meta">Multimodal fusion, cross-modal attention</div>
+              </div>
+              <div class="org">
+                A standalone smart hub that estimates which direction a user is speaking toward from anywhere in a room by fusing
+                a co-located microphone array and mmWave radar.
+              </div>
+
+              <p class="small" style="margin-top:8px;">
+                VoiceDirect leverages the complementary strengths of acoustic radiation patterns and mmWave-derived body pose.
+                The system localizes the speaker with mmWave, focuses on speaker-originated audio, then uses a cross-modal
+                attention model to integrate audio features and mmWave features for speaking-direction inference.
+              </p>
+
+              <ul class="small" style="margin:10px 0 0 18px;">
+                <li>Dataset: 6,000+ voice commands, 8 speakers, 6 environments.</li>
+                <li>Median speaking-direction error as low as 19°, outperforming prior systems.</li>
+              </ul>
+
+              <figure class="card" style="margin-top:12px;">
+                <figcaption class="small"><b>System overview.</b> </figcaption>
+                <img src="assets/voicedirect_system.png" alt="VoiceDirect system diagram" loading="lazy" style="width:100%; border-radius:14px; border:1px solid var(--border); margin-top:8px;">
+              </figure>
+            </div>
+
+          </div>
+        </section>
+
+            
             
         <section id="news" aria-labelledby="news-h">
           <h2 id="news-h">News</h2>
